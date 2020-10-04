@@ -1,0 +1,32 @@
+.navbar-brand {
+    margin-left: 50px;
+}
+
+hr {
+    color: black;
+}
+
+h2 {
+    margin-left: 50px;
+}
+
+.Questions {
+    display : flex;
+}
+
+.new-question {
+    display: inline;
+    padding: 10px;
+}
+
+.hot-question {
+    margin-left: 30px;
+    padding: 10px;
+    font-size : 20px;
+}
+
+.question-box {
+    border: 1px solid;
+    padding: 10px;
+    margin: 10px;
+}
