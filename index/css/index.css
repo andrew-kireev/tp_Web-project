@@ -26,7 +26,50 @@ h2 {
 }
 
 .question-box {
-    border: 1px solid;
+    border: 2px solid;
     padding: 10px;
     margin: 10px;
+    margin-right: 60px;
+}
+
+.question-img {
+    margin: 10px;
+    border: 3px solid
+}
+
+.like {
+    width: 50px;
+    margin-left: 65px;
+}
+
+.img-rating {
+    margin-left: 30px;
+    display: block;
+}
+
+.answers-tags {
+    display: inline;
+    display: flex;
+}
+
+.answers-tags p{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+a {
+    text-decoration: underline;
+}
+.popular-tag{
+    margin-top: -30px;
+}
+
+.tags {
+    display: flex;
+}
+.tags p {
+    margin-left: 10px;
+    font-size: 25px;
+    font-style: italic;
+    color: gray;
 }
