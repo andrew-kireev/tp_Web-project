@@ -1,4 +1,15 @@
+@font-face {
+    font-family: Quicksand;
+    src: url("Quicksand-VariableFont_wght.ttf");
+}
+
+* {
+    font-family: Quicksand;
+}
+
 .navbar-brand {
+    font-size: 24px;
+    margin-bottom: 10px;
     margin-left: 50px;
 }
 
@@ -11,15 +22,18 @@ hr {
 }
 
 .Questions {
+    margin-top: 25px;
     display : flex;
 }
 
 .new-question {
+    font-weight: bold;
     display: inline;
     padding: 10px;
 }
 
 .hot-question {
+    margin-top: 5px;
     margin-left: 30px;
     padding: 10px;
     font-size : 20px;
@@ -30,7 +44,8 @@ hr {
     padding: 10px;
     margin: 10px;
     margin-right: 60px;
-    margin-top: 60px;
+    margin-top: 37px;
+    border-radius: 12px;
 }
 
 .question-img {
@@ -89,6 +104,7 @@ main a {
     margin-top: 100px;
 }
 .best-members {
+    margin-top: 50px;
     display: block;
     font-size: 22px;
 }
@@ -117,4 +133,34 @@ main a {
     color: white;
     margin-left: 3px;
     margin-right: 3px;
+}
+
+.tags p:nth-child(5n-2) {
+    color: red;
+    font-size: 25px;
+}
+
+.tags p:nth-child(2n+2) {
+    color: blue;
+    font-size: 30px;
+}
+
+.tags p:nth-child(4n) {
+    color: green;
+    font-size: 30px;
+}
+
+.tags p:nth-child(7n) {
+    color: black;
+    font-size: 20px;
+}
+
+.tags p {
+    margin-right: 25px;
+}
+
+
+
+.side_tags {
+    margin-top: 30px;
 }
