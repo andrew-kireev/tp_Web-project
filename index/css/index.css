@@ -238,3 +238,30 @@ hr {
     margin-left: 11px;
     margin-right: 60px
 }
+
+
+/* New_question */
+
+
+.title {
+    display: flex;
+    display: inline;
+}
+
+.input-text {
+    height: 300px;
+    width: 300px;
+}
+
+.col-form-label-lg {
+    padding-left: 60px;
+}
+
+.form-group {
+    padding-right: 42px;
+}
+
+.button-ask {
+    margin-top: 30px;
+    margin-left: 204px;
+}
