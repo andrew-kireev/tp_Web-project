@@ -191,3 +191,50 @@ main a {
     display: inline;
     padding: 10px;
 }
+
+/* one_question_page */
+
+.question-tags {
+    margin-left: -50px;
+    display: inline-block;
+    display: flex;
+}
+
+.question-tags p{
+    margin-left: 20px;
+    margin-top: 2px;
+    font-size: 20px;
+}
+
+.registretion {
+    margin-right: 70px;
+}
+
+.registretion p{
+    color: white;
+    margin-left: 3px;
+    margin-bottom: 5px;
+    margin-top: 12px;
+}
+
+
+.form-group {
+    margin-top: 30px;
+    margin-right: 56px;
+}
+
+
+.custom-control {
+    margin-top: 20px;
+    margin-left: -15px;
+}
+
+.button-answer{
+    margin-left: 11px;
+    margin-bottom: 30px;
+}
+
+hr {
+    margin-left: 11px;
+    margin-right: 60px
+}
