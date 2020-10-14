@@ -265,3 +265,24 @@ hr {
     margin-top: 30px;
     margin-left: 204px;
 }
+
+
+/* login */
+
+
+.error-message {
+    color: red;
+    margin-left: 57px;
+    margin-top: 7px;
+}
+
+
+.form-group .col-sm-10 {
+    padding-right: 650px;
+}
+
+.create-account {
+    display: block;
+    margin-left: 204px;
+    margin-top: 35px;
+}
