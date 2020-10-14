@@ -283,6 +283,15 @@ hr {
 
 .create-account {
     display: block;
-    margin-left: 204px;
+    /* margin-left: 204px; */
     margin-top: 35px;
+}
+
+
+/* Registration */
+
+
+.registr-button {
+    margin-left: 204px;
+    margin-top: 15px;
 }
