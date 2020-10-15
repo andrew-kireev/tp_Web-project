@@ -266,6 +266,10 @@ hr {
     margin-left: 204px;
 }
 
+.new-quesion-inputs .col-sm-10 {
+    padding-right: 70px;
+}
+
 
 /* login */
 
@@ -277,13 +281,13 @@ hr {
 }
 
 
-.form-group .col-sm-10 {
+.short .col-sm-10 {
     padding-right: 650px;
 }
 
 .create-account {
     display: block;
-    /* margin-left: 204px; */
+    margin-left: 204px;
     margin-top: 35px;
 }
 
@@ -294,4 +298,12 @@ hr {
 .registr-button {
     margin-left: 204px;
     margin-top: 15px;
+}
+
+
+/* Settings */
+
+.save-button {
+    margin-left: 204px;
+    margin-top: 5px;
 }
