@@ -1,169 +1,24 @@
-<!doctype html>
-<html lang="en" class="h-100">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
-    <title>Question page</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="img/speech-bubble-with-question-mark.png">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
-  </head>
-  <body class="d-flex flex-column h-100">
-<header>
-    <nav class="navbar navbar-dark bg-dark">
-        <a href="#" class="navbar-brand">Questions and Answers</a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="
-            width: 500px;">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ASK!</button>
-        </form>
-        <div class="profile">
-            <span class="registretion">
-                <a href="#" class="settings">log in</a>
-                <a href="#" class="settings">register</a>
-            </span>
-        </div>
-      </nav>
-</header>
+{% extends 'inc/base.html' %}
 
-<main>
-    <hr/>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-9">
-                <div class="row main-question">
-                    <div class="col-3">
-                        <div class="img-rating">
-                            <img class="question-img" src="img/grapefruit-slice-332-332.jpg" height="170px"></img>
-                            <input class="like" type="number" value="2" size="50px">
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <h2 class="question-title" style="margin-left: 10px">Some Question?</h2>
-                            <div class="question-text"  style="
-                            margin-right: 200px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                            </div>
-                        </div>
-                        <div class="row tag" style="margin-top: 70px">
-                            <span class="question-tags">
-                                <h3 style="margin-left: 40px;">Tags:</h3>
-                                <a href="#"><p>some tag1</p></a>
-                                <a href="#"><p>some tag2</p></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row question-box">
-                    <div class="col-3">
-                        <div class="img-rating">
-                            <img class="question-img" src="img/grapefruit-slice-332-332.jpg" height="170px"></img>
-                            <input class="like" type="number" value="5" size="50px">
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <div class="question-text"  style="
-                            margin-right: 200px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                            </div>
-                        </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Correct!</label>
-                            </div>
-                    </div>
-                </div>
-                <div class="row question-box">
-                    <div class="col-3">
-                        <div class="img-rating">
-                            <img class="question-img" src="img/grapefruit-slice-332-332.jpg" height="170px"></img>
-                            <input class="like" type="number" value="3" size="50px">
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <div class="question-text"  style="
-                            margin-right: 200px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                            </div>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Correct!</label>
-                        </div>
-                    </div>
-                </div>
-                <hr style="margin-top: 30px"/>
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <textarea type="text" class="form-control form-control-lg textarea" id="colFormLabelLg" 
-                        placeholder="Enter your answer here.." style="height: 120px;margin-left: 11px;"></textarea>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-dark button-answer" style="width: 100px">Answer</button>
-            </div>
-            <div class="col-3">
-                <div class="row test">
-                    <span class="tags">
-                        <h1 class="one_question_popular-tag">Popular Tags</h1>
-                        <p style='margin-top: 19px;'>python</p>
-                        <p>C++</p>
-                        <p>Linux</p>
-                        <p>TechnoPark</p>
-                        <p>MailRu</p>
-                        <p>Golang</p>
-                        <p>Ngnix</p>
-                        <p>Docker</p>
-                    </span>
-                </div>
-                <div class="row best-members">
-                    <h2>Best Members</h2>
-                        <div class="side_tags" style="font-size: 23px;">
-                          <p> 
-                            <a href="#">Pavel Durov</a>
-                          </p> 
-                          <p> 
-                            <a href="#">Elon Musk</a>
-                          </p> 
-                          <p> 
-                            <a href="#">Linus Torvalds</a>
-                          </p> 
-                        </div>
-                      </div>
-                  </div>
-            </div>
+{% block title %}Question page{% endblock title %}
+
+{% block navbar %}
+{% include 'inc/logged_navbar.html' %}
+{% endblock navbar %}
+
+{% block content %}
+
+{% include 'inc/question.html' %}
+{% include 'inc/answer.html' %}
+{% include 'inc/answer.html' %}
+
+<hr style="margin-top: 30px"/>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <textarea type="text" class="form-control form-control-lg textarea" id="colFormLabelLg"
+            placeholder="Enter your answer here.." style="height: 120px;margin-left: 11px;"></textarea>
         </div>
     </div>
-</main>
-    <script src="js/jquery.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+<button type="button" class="btn btn-dark button-answer" style="width: 100px">Answer</button>
+
+{% endblock content %}

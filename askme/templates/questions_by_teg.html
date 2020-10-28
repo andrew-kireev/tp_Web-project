@@ -1,185 +1,23 @@
-<!doctype html>
-<html lang="en" class="h-100">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
-    <title>Question by tag</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="img/speech-bubble-with-question-mark.png">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
-  </head>
-  <body class="d-flex flex-column h-100">
-<header>
-    <nav class="navbar navbar-dark bg-dark">
-        <a href="#" class="navbar-brand">Questions and Answers</a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="
-            width: 500px;">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ASK!</button>
-        </form>
-        <div class="profile">
-            <img class="profile-img"src="img/profile.jpeg">
-            <span class="profile-links">
-                <p>Profile name</p>
-                <a href="#" class="settings">settings</a>
-                <a href="#" class="settings">log out</a>
-            </span>
-        </div>
-      </nav>
-</header>
+{% extends 'inc/base.html' %}
 
-<main>
-    <hr/>
-    <span class="Tags-header">
+{% block title %}Question by teg{% endblock title %}
+
+{% block navbar %}
+{% include 'inc/logged_navbar.html' %}
+{% endblock navbar %}
+
+{% block name %}
+<span class="Tags-header">
         <h2 class="new-question">Tag:</h2>
         <h2 class="header-some-tag">Some tag</h2>
-    </span>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-9">
-                <div class="row question-box">
-                    <div class="col-3">
-                        <div class="img-rating">
-                            <img class="question-img" src="img/grapefruit-slice-332-332.jpg" height="170px"></img>
-                            <input class="like" type="number" value="2" size="50px">
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <h2 class="question-title" style="margin-left: 10px">Some Question?</h2>
-                            <div class="question-text"  style="
-                            margin-right: 200px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                            </div>
-                        </div>
-                        <div class="row tag" style="margin-top: 70px">
-                            <span class="answers-tags">
-                                <a href="#"><h3>answer(3)</h3></a>
-                                <h3 style="margin-left: 40px;">Tags:</h3>
-                                <a href="#"><p>some tag1</p></a>
-                                <a href="#"><p>some tag2</p></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row question-box">
-                    <div class="col-3">
-                        <div class="img-rating">
-                            <img class="question-img" src="img/grapefruit-slice-332-332.jpg" height="170px"></img>
-                            <input class="like" type="number" value="2" size="50px">
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <h2 class="question-title" style="margin-left: 10px">Some Question?</h2>
-                            <div class="question-text"  style="
-                            margin-right: 200px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                            </div>
-                        </div>
-                        <div class="row tag" style="margin-top: 70px">
-                            <span class="answers-tags">
-                                <a href="#"><h3>answer(3)</h3></a>
-                                <h3 style="margin-left: 40px;">Tags:</h3>
-                                <a href="#"><p>some tag1</p></a>
-                                <a href="#"><p>some tag2</p></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row question-box">
-                    <div class="col-3">
-                        <div class="img-rating">
-                            <img class="question-img" src="img/grapefruit-slice-332-332.jpg" height="170px"></img>
-                            <input class="like" type="number" value="2" size="50px">
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <h2 class="question-title" style="margin-left: 10px">Some Question?</h2>
-                            <div class="question-text"  style="
-                            margin-right: 200px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Officiis, modi maiores dolores blanditiis voluptatum rerum, 
-                                assumenda tempore laborum odio quia dolorum 
-                                soluta illo quae reiciendis eligendi ratione ab recusandae debitis!
-                            </div>
-                        </div>
-                        <div class="row tag" style="margin-top: 70px">
-                            <span class="answers-tags">
-                                <a href="#"><h3>answer(3)</h3></a>
-                                <h3 style="margin-left: 40px;">Tags:</h3>
-                                <a href="#"><p>some tag1</p></a>
-                                <a href="#"><p>some tag2</p></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row paginator">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                              <span aria-hidden="true">&laquo;</span>
-                            </a>
-                          </li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">4</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="row test">
-                    <span class="tags">
-                        <h1 class="popular-tag">Popular Tags</h1>
-                        <p style='margin-top: 19px;'>python</p>
-                        <p>C++</p>
-                        <p>Linux</p>
-                        <p>TechnoPark</p>
-                        <p>MailRu</p>
-                        <p>Golang</p>
-                        <p>Ngnix</p>
-                        <p>Docker</p>
-                    </span>
-                </div>
-                <div class="row best-members">
-                    <h2>Best Members</h2>
-                        <div class="side_tags" style="font-size: 23px;">
-                          <p> 
-                            <a href="#">Pavel Durov</a>
-                          </p> 
-                          <p> 
-                            <a href="#">Elon Musk</a>
-                          </p> 
-                          <p> 
-                            <a href="#">Linus Torvalds</a>
-                          </p> 
-                        </div>
-                      </div>
-                  </div>
-            </div>
-        </div>
-    </div>
-</main>
-    <script src="js/jquery.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+</span>
+{% endblock name %}
+
+{% block content %}
+
+{% include 'inc/one_question.html' %}
+{% include 'inc/one_question.html' %}
+{% include 'inc/one_question.html' %}
+{% include 'inc/paginator.html' %}
+
+{% endblock content %}

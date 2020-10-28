@@ -1,3 +1,5 @@
+{% load static %}
+
 <nav class="navbar navbar-dark bg-dark">
     <a href="#" class="navbar-brand">Questions and Answers</a>
     <form class="form-inline">
@@ -6,9 +8,11 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ASK!</button>
     </form>
     <div class="profile">
-        <span class="registretion">
-            <a href="#" class="settings">log in</a>
-            <a href="#" class="settings">register</a>
+        <img class="profile-img"src="{% static "img/profile.jpeg" %}">
+        <span class="profile-links">
+            <p>Profile name</p>
+            <a href="#" class="settings">settings</a>
+            <a href="#" class="settings">log out</a>
         </span>
     </div>
 </nav>

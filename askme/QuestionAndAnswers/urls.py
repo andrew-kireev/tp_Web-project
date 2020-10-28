@@ -22,5 +22,10 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('login', views.login),
     path('new_qustion', views.new_question),
+    path('registration', views.registration),
+    path('questions_by_teg', views.questions_by_teg),
+    path('questions_and_answers', views.questions_and_answers),
+    path('one_question_page', views.one_question),
+    path('settings', views.settings),
     path('test', views.test)
 ]
