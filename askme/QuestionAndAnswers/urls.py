@@ -24,7 +24,7 @@ urlpatterns = [
     path('login', views.login),
     path('new_qustion', views.new_question),
     path('registration', views.registration),
-    path('questions_by_teg', views.questions_by_teg),
+    path('questions_by_teg/<slug:tag_name>', views.questions_by_teg),
     path('', views.questions_and_answers),
     re_path(r'^one_question_page/(\d+)/$', views.one_question),
     path('settings', views.settings),

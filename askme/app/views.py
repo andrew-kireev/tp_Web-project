@@ -16,7 +16,8 @@ for i in range(0, 30):
   questions.append({
     'title': 'title' + str(i),
     'id': i,
-    'text': text
+    'text': text,
+    'tag': 'tag' + str(i)
   })
 
   answers = []
@@ -26,15 +27,20 @@ for i in range(0, 30):
       })
 
 one_page_question = [{'title': 'title1',
-                      'text': 'What type of music are you into?'},
+                      'text': 'What type of music are you into?',
+                      'tag': 'tag1'},
                      {'title': 'title2',
-                      'text': 'What was the best vacation you ever took and why?'},
+                      'text': 'What was the best vacation you ever took and why?',
+                      'tag': 'tag1'},
                      {'title': 'title3',
-                      'text': 'Do you like going to the movies or prefer watching at home?'},
+                      'text': 'Do you like going to the movies or prefer watching at home?',
+                      'tag': 'tag2'},
                      {'title': 'title4',
-                      'text': 'What’s your favorite thing about your current job?'},
+                      'text': 'What’s your favorite thing about your current job?',
+                      'tag': 'tag2'},
                      {'title': 'title5',
-                      'text': 'What do you remember most about your first job?'}]
+                      'text': 'What do you remember most about your first job?',
+                      'tag': 'tag2'}]
 
 
 
@@ -58,12 +64,20 @@ def paginate(objects_list, request):
 
     return page.object_list, page
 
-def questions_by_teg(request):
-    page_obj, page = paginate(questions, request)
+def questions_by_teg(request, tag_name):
+    questions_ = []
+    for item in one_page_question:
+        if item['tag'] == tag_name:
+            questions_.append(item)
+
+    page_obj, page = paginate(questions_, request)
+
+    print(questions_)
 
     return render(request, 'questions_by_teg.html', {
-        'questions' : page_obj,
-        'page' : page
+        'questions': page_obj,
+        'tag': tag_name,
+        'page': page
     })
 
 
@@ -72,8 +86,8 @@ def questions_and_answers(request):
     page_obj, page = paginate(questions, request)
 
     return render(request, 'questions_and_answers.html', {
-        'questions' : page_obj,
-        'page' : page
+        'questions': page_obj,
+        'page': page,
     })
 
 def one_question(request, page_number):
@@ -83,9 +97,9 @@ def one_question(request, page_number):
     print(question)
 
     return render(request, 'one_question_page.html',  {
-        'question' : question,
-        'answers' : page_obj,
-        'page' : page
+        'question': question,
+        'answers': page_obj,
+        'page': page
     })
 
 def login(request):
