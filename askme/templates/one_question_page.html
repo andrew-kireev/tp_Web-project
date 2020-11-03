@@ -9,8 +9,9 @@
 {% block content %}
 
 {% include 'inc/question.html' %}
-{% include 'inc/answer.html' %}
-{% include 'inc/answer.html' %}
+{% for answer in answers %}
+    {% include 'inc/answer.html' %}
+{% endfor %}
 
 <hr style="margin-top: 30px"/>
     <div class="form-group row">
@@ -20,5 +21,7 @@
         </div>
     </div>
 <button type="button" class="btn btn-dark button-answer" style="width: 100px">Answer</button>
+
+{% include 'inc/paginator.html' %}
 
 {% endblock content %}
