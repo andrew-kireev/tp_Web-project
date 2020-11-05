@@ -43,6 +43,21 @@ one_page_question = [{'title': 'title1',
                       'text': 'What do you remember most about your first job?',
                       'tag': 'tag2'}]
 
+popular_tags = ['python',
+                'C++',
+                'Linux',
+                'TechnoPark',
+                'MailRu',
+                'Golang',
+                'Ngnix',
+                'Docker']
+
+best_members = ['Pavel Durov',
+                'Elon Mask',
+                'Linus Torvalds',
+                'Anton']
+
+
 
 def paginate(objects_list, request):
     page_number = request.GET.get('page')
@@ -75,7 +90,9 @@ def questions_by_teg(request, tag_name):
     return render(request, 'questions_by_teg.html', {
         'questions': page_obj,
         'tag': tag_name,
-        'page': page
+        'page': page,
+        'popular_tags': popular_tags,
+        'best_members': best_members
     })
 
 
@@ -85,6 +102,8 @@ def questions_and_answers(request):
     return render(request, 'questions_and_answers.html', {
         'questions': page_obj,
         'page': page,
+        'popular_tags': popular_tags,
+        'best_members': best_members
     })
 
 
@@ -97,24 +116,38 @@ def one_question(request, page_number):
     return render(request, 'one_question_page.html', {
         'question': question,
         'answers': page_obj,
-        'page': page
+        'page': page,
+        'popular_tags': popular_tags,
+        'best_members': best_members
     })
 
 
 def login(request):
-    return render(request, 'login.html', {})
+    return render(request, 'login.html', {
+        'popular_tags': popular_tags,
+        'best_members': best_members
+    })
 
 
 def new_question(request):
-    return render(request, 'new_question.html', {})
+    return render(request, 'new_question.html', {
+        'popular_tags': popular_tags,
+        'best_members': best_members
+    })
 
 
 def registration(request):
-    return render(request, 'registration.html', {})
+    return render(request, 'registration.html', {
+        'popular_tags': popular_tags,
+        'best_members': best_members
+    })
 
 
 def settings(request):
-    return render(request, 'settings.html', {})
+    return render(request, 'settings.html', {
+        'popular_tags': popular_tags,
+        'best_members': best_members
+    })
 
 
 def test(request):

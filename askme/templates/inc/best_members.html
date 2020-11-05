@@ -1,14 +1,10 @@
 <div class="row best-members">
     <h2>Best Members</h2>
     <div class="side_tags" style="font-size: 23px;">
-      <p>
-        <a href="#">Pavel Durov</a>
-      </p>
-      <p>
-        <a href="#">Elon Musk</a>
-      </p>
-      <p>
-        <a href="#">Linus Torvalds</a>
-      </p>
+        {% for member in best_members %}
+            <p>
+                <a href="#"> {{ member }} </a>
+            </p>
+        {% endfor %}
     </div>
 </div>
