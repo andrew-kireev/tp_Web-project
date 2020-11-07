@@ -18,7 +18,8 @@ for i in range(0, 30):
         'title': 'title' + str(i),
         'id': i,
         'text': text,
-        'tag': ['tag' + str(i), 'tag']
+        'tags': ['tag' + str(i), 'tag'],
+        'id': int(i)
     })
 
     answers = []
@@ -28,20 +29,30 @@ for i in range(0, 30):
         })
 
 one_page_question = [{'title': 'title1',
+                      'id': 423,
                       'text': 'What type of music are you into?',
-                      'tag': 'tag1'},
+                      'tag': 'tag1',
+                      'tags': ['tag1', 'tag5']},
                      {'title': 'title2',
+                      'id': 424,
                       'text': 'What was the best vacation you ever took and why?',
-                      'tag': 'tag1'},
+                      'tag': 'tag1',
+                      'tags': ['tag1', 'tag8']},
                      {'title': 'title3',
+                      'id': 43,
                       'text': 'Do you like going to the movies or prefer watching at home?',
-                      'tag': 'tag2'},
+                      'tag': 'tag2',
+                      'tags': ['tag2', 'tag20']},
                      {'title': 'title4',
+                      'id': 433,
                       'text': 'What’s your favorite thing about your current job?',
-                      'tag': 'tag2'},
+                      'tag': 'tag2',
+                      'tags': ['tag2', 'tag99']},
                      {'title': 'title5',
+                      'id': 323,
                       'text': 'What do you remember most about your first job?',
-                      'tag': 'tag2'}]
+                      'tag': 'tag2',
+                      'tags': ['tag2', 'tag17']}]
 
 popular_tags = ['python',
                 'C++',
@@ -85,7 +96,8 @@ def questions_by_teg(request, tag_name):
 
     page_obj, page = paginate(questions_, request)
 
-    print(questions_)
+    # print(questions_)
+    print(tag_name)
 
     return render(request, 'questions_by_teg.html', {
         'questions': page_obj,
@@ -112,6 +124,7 @@ def one_question(request, page_number):
     question = one_page_question[int(page_number)]
 
     print(question)
+    print(question['tags'])
 
     return render(request, 'one_question_page.html', {
         'question': question,

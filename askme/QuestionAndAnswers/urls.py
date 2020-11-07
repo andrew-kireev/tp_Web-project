@@ -21,12 +21,13 @@ from app import views
 
 urlpatterns = [
     path('admin', admin.site.urls),
-    path('login', views.login),
-    path('new_qustion', views.new_question),
-    path('registration', views.registration),
-    path('questions_by_teg/<slug:tag_name>', views.questions_by_teg),
-    path('', views.questions_and_answers),
-    re_path(r'^one_question_page/(\d+)/$', views.one_question),
-    path('settings', views.settings),
+    path('login', views.login, name='login'),
+    path('new_qustion', views.new_question, name='new-question'),
+    path('registration', views.registration, name='registration'),
+    path('questions_by_teg/<slug:tag_name>', views.questions_by_teg, name='question-by-teg'),
+    path('', views.questions_and_answers, name='main-page'),
+    path('one_question_page/<int:page_number>/', views.one_question, name='one-question-page'),
+    re_path(r'^one_question_page/(\d+)/$', views.one_question, name='one-question-page'),
+    path('settings', views.settings, name='settings'),
     path('test', views.test)
 ]
