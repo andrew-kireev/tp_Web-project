@@ -19,7 +19,7 @@
                 <a href="{% url 'one-question-page' question.id %}"><h3>answer(3)</h3></a>
                 <h3 style="margin-left: 40px;">Tags:</h3>
 <!--                    <a href="#"><p>{{ question.tag }}</p></a>-->
-                {% for tag_ in question.tags %}
+                {% for tag_ in question.tags.all %}
                   <a href="{% url 'question-by-teg' tag_ %}"><p> {{ tag_ }} </p></a>
                 {% endfor %}
             </span>

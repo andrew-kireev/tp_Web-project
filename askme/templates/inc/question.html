@@ -18,7 +18,7 @@
             <span class="question-tags">
                 <h3 style="margin-left: 40px;">Tags:</h3>
 <!--                <a href="#"><p>{{ questions.tag }}</p></a>-->
-                {% for tag_ in question.tags %}
+                {% for tag_ in question.tags.all %}
                   <a href="{% url 'question-by-teg' tag_ %}"><p> {{ tag_ }} </p></a>
                 {% endfor %}
             </span>

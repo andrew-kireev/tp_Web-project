@@ -26,6 +26,7 @@ urlpatterns = [
     path('registration', views.registration, name='registration'),
     path('questions_by_teg/<slug:tag_name>', views.questions_by_teg, name='question-by-teg'),
     path('', views.questions_and_answers, name='main-page'),
+    path('hot_questions', views.hot_questions, name='hot-questions'),
     path('one_question_page/<int:page_number>/', views.one_question, name='one-question-page'),
     re_path(r'^one_question_page/(\d+)/$', views.one_question, name='one-question-page'),
     path('settings', views.settings, name='settings'),
