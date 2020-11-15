@@ -4,7 +4,7 @@
     <div class="col-3">
         <div class="img-rating">
             <img class="question-img" src="{% static "img/grapefruit-slice-332-332.jpg" %}" height="170px"></img>
-            <input class="like" type="number" value="2" size="50px">
+            <input class="like" type="number" value={{ question.likes }} size="50px">
         </div>
     </div>
     <div class="col-9">
@@ -16,7 +16,7 @@
         </div>
         <div class="row tag" style="margin-top: 70px">
             <span class="answers-tags">
-                <a href="{% url 'one-question-page' question.id %}"><h3>answer(3)</h3></a>
+                <a href="{% url 'one-question-page' question.id %}"><h3>answers ({{ question.answers_count }}) </h3></a>
                 <h3 style="margin-left: 40px;">Tags:</h3>
 <!--                    <a href="#"><p>{{ question.tag }}</p></a>-->
                 {% for tag_ in question.tags.all %}

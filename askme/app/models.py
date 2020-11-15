@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from datetime import datetime
 
 # Create your models here.
@@ -7,7 +8,10 @@ from datetime import datetime
 
 class QuestionManager(models.Manager):
     def get_most_popular(self):
-        return Question.objects.all().order_by('-creation_date').reverse()
+        return Question.objects.all().order_by('-likes')
+
+    def get_newest(self):
+        return Question.objects.all().order_by('creation_date')
 
     def get_quest_by_teg(self, tag):
         questions = Question.objects.filter(tags__name=tag)
@@ -15,6 +19,7 @@ class QuestionManager(models.Manager):
 
     def get_que_by_id(self, index):
         return Question.objects.filter(pk=index)
+
 
 
 class AnswerManager(models.Manager):
@@ -29,8 +34,7 @@ class TagManager(models.Manager):
 
 class ProfileManager(models.Manager):
     def get_top_five(self):
-        return Profile.objects.all()[:10]
-
+        return Profile.objects.all()[:5]
 
 
 class Tag(models.Model):
@@ -38,6 +42,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_index=True)
@@ -54,7 +59,8 @@ class Question(models.Model):
     creation_date = models.DateTimeField(default=datetime.now, verbose_name='Date of creation')
     text = models.TextField(verbose_name='Text')
     tags = models.ManyToManyField(Tag, blank=True)
-
+    likes = models.IntegerField(default=0)
+    answers_count = models.IntegerField(default=0)
     class Meta:
         verbose_name = 'Question'
         verbose_name_plural = 'Questions'
@@ -65,18 +71,27 @@ class Question(models.Model):
 
 class Answer(models.Model):
     Author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    title = models.CharField(max_length=1024, verbose_name='Title')
     text = models.TextField(verbose_name='Text')
     creation_date = models.DateTimeField(default=datetime.now, verbose_name='Date of creation')
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name = 'Answer'
+        verbose_name_plural = 'Answers'
 
     def __str__(self):
-        return self.title
+        return self.text
 
 
 class Like(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+
+class AnswersLikes(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
 
 
 

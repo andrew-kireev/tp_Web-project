@@ -4,6 +4,7 @@ from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Pagi
 # from djangoProject.settings import PER_PAGE
 from django.http import HttpResponse
 from .models import *
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -112,7 +113,9 @@ def questions_by_teg(request, tag_name):
 
 
 def questions_and_answers(request):
-    que = QuestionManager().get_most_popular()
+    que = QuestionManager().get_newest()
+    # for i in que:
+    #    # print(i.answers_count)
     page_obj, page = paginate(que, request)
 
     popular_tags = TagManager().get_top_five()
@@ -141,6 +144,7 @@ def hot_questions(request):
     # print(que[0].creation_date)
     # print(que[1].creation_date)
 
+
     return render(request, 'hot_questions.html', {
         'questions': page_obj,
         'page': page,
@@ -153,56 +157,61 @@ def one_question(request, page_number):
     question = QuestionManager().get_que_by_id(int(page_number))
     # print(question)
     ans = AnswerManager().get_answers(int(page_number))
-    print(ans)
+    print(ans.count())
 
     page_obj, page = paginate(ans, request)
     popular_tags = TagManager().get_top_five()
+    best_members_ = ProfileManager().get_top_five()
 
     # print(question[0].title)
     # print(page)
-
     return render(request, 'one_question_page.html', {
         'question': question[0],
         'answers': page_obj,
         'page': page,
         'popular_tags': popular_tags,
-        'best_members': best_members
+        'best_members': best_members_
     })
 
 
 def login(request):
     popular_tags = TagManager().get_top_five()
 
+    best_members_ = ProfileManager().get_top_five()
+
     return render(request, 'login.html', {
         'popular_tags': popular_tags,
-        'best_members': best_members
+        'best_members': best_members_
     })
 
 
 def new_question(request):
     popular_tags = TagManager().get_top_five()
+    best_members_ = ProfileManager().get_top_five()
 
     return render(request, 'new_question.html', {
         'popular_tags': popular_tags,
-        'best_members': best_members
+        'best_members': best_members_
     })
 
 
 def registration(request):
     popular_tags = TagManager().get_top_five()
+    best_members_ = ProfileManager().get_top_five()
 
     return render(request, 'registration.html', {
         'popular_tags': popular_tags,
-        'best_members': best_members
+        'best_members': best_members_
     })
 
 
 def settings(request):
     popular_tags = TagManager().get_top_five()
+    best_members_ = ProfileManager().get_top_five()
 
     return render(request, 'settings.html', {
         'popular_tags': popular_tags,
-        'best_members': best_members
+        'best_members': best_members_
     })
 
 
