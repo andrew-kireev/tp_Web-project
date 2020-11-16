@@ -3,8 +3,15 @@
 <div class="row question-box">
     <div class="col-3">
         <div class="img-rating">
-            <img class="question-img" src="{% static "img/grapefruit-slice-332-332.jpg" %}" height="170px"></img>
-            <input class="like" type="number" value={{ question.likes }} size="50px">
+            <img class="question-img" src={{ question.Author.img }} height="170px" width="170px"></img>
+<!--            <input class="like" type="number" value={{ question.likes }} size="50px">-->
+            <div class='like'>
+              <button class='like-toggle basic'>♥</button>
+                <p class="number-of-likes">{{ question.likes }}</p>
+<!--              <span class='hidden' >1 Like</span>-->
+            </div>
+<!--            <button type="submit" class="like" name="blogpost_id" value={{ question.likes }} class="btn btn-info">Like</button>-->
+<!--            <p class="like">{{ question.likes }}</p>-->
         </div>
     </div>
     <div class="col-9">
@@ -14,7 +21,7 @@
             margin-right: 200px;">{{  question.text }}
             </div>
         </div>
-        <div class="row tag" style="margin-top: 70px">
+        <div class="row tag" style="margin-top: 60px">
             <span class="answers-tags">
                 <a href="{% url 'one-question-page' question.id %}"><h3>answers ({{ question.answers_count }}) </h3></a>
                 <h3 style="margin-left: 40px;">Tags:</h3>

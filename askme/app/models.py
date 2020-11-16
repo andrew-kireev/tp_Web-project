@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from datetime import datetime
 
-# Create your models here.
 
 
 class QuestionManager(models.Manager):
@@ -24,12 +23,12 @@ class QuestionManager(models.Manager):
 
 class AnswerManager(models.Manager):
     def get_answers(self, index):
-        return Answer.objects.all().filter(question__pk=index).all()
+        return Answer.objects.all().filter(question__pk=index).all().order_by('-likes')
 
 
 class TagManager(models.Manager):
     def get_top_five(self):
-        return Tag.objects.all()[:10]
+        return Tag.objects.all().order_by('-rating')[:10]
 
 
 class ProfileManager(models.Manager):
@@ -39,6 +38,7 @@ class ProfileManager(models.Manager):
 
 class Tag(models.Model):
     name = models.CharField(max_length=64, verbose_name='Tag name')
+    rating = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

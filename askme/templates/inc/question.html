@@ -3,9 +3,16 @@
 <div class="row main-question">
     <div class="col-3">
             <div class="img-rating">
-                <img class="question-img" src="{% static "img/grapefruit-slice-332-332.jpg" %}" height="170px"></img>
-                <input class="like" type="number" value={{ question.likes }} size="50px">
+            <img class="question-img" src={{ question.Author.img }} height="170px" width="170px"></img>
+<!--            <input class="like" type="number" value={{ question.likes }} size="50px">-->
+            <div class='like'>
+              <button class='like-toggle basic'>♥</button>
+                <p class="number-of-likes">{{ question.likes }}</p>
+<!--              <span class='hidden' >1 Like</span>-->
             </div>
+<!--            <button type="submit" class="like" name="blogpost_id" value={{ question.likes }} class="btn btn-info">Like</button>-->
+<!--            <p class="like">{{ question.likes }}</p>-->
+        </div>
     </div>
     <div class="col-9">
         <div class="row" style="display: inline-block">

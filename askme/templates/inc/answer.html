@@ -4,7 +4,12 @@
     <div class="col-3">
         <div class="img-rating">
             <img class="question-img" src="{% static "img/grapefruit-slice-332-332.jpg" %}" height="170px"></img>
-            <input class="like" type="number" value="3" size="50px">
+<!--            <input class="like" type="number" value={{  answer.likes }} size="50px">-->
+            <div class='like'>
+              <button class='like-toggle basic'>♥</button>
+                <p class="number-of-likes">{{ answer.likes }}</p>
+<!--              <span class='hidden' >1 Like</span>-->
+            </div>
         </div>
     </div>
     <div class="col-9">
@@ -14,8 +19,8 @@
             </div>
         </div>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Correct!</label>
+            <input type="checkbox" id="customCheck1">
+            <label class="label">Correct!</label>
         </div>
     </div>
 </div>

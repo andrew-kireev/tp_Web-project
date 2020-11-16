@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
 # from djangoProject.settings import PER_PAGE
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import *
 from django.shortcuts import get_object_or_404
 
@@ -91,39 +91,31 @@ def paginate(objects_list, request):
 
 
 def questions_by_teg(request, tag_name):
-    que = QuestionManager().get_quest_by_teg(tag_name)
-    questions_ = []
-    # for item in one_page_question:
-    #     if item['tag'] == tag_name:
-    #         questions_.append(item)
-
-    page_obj, page = paginate(que, request)
-    popular_tags = TagManager().get_top_five()
-
-    # print(page_obj)
-    # print(tag_name)
+    try:
+        que = QuestionManager().get_quest_by_teg(tag_name)
+        page_obj, page = paginate(que, request)
+        popular_tags = TagManager().get_top_five()
+        best_members_ = ProfileManager().get_top_five()
+    except:
+        raise Http404("")
 
     return render(request, 'questions_by_teg.html', {
         'questions': page_obj,
         'tag': tag_name,
         'page': page,
         'popular_tags': popular_tags,
-        'best_members': best_members
+        'best_members': best_members_
     })
 
 
 def questions_and_answers(request):
-    que = QuestionManager().get_newest()
-    # for i in que:
-    #    # print(i.answers_count)
-    page_obj, page = paginate(que, request)
-
-    popular_tags = TagManager().get_top_five()
-
-    best_members_ = ProfileManager().get_top_five()
-
-    # print(que[0].creation_date)
-    # print(que[1].creation_date)
+    try:
+        que = QuestionManager().get_newest()
+        page_obj, page = paginate(que, request)
+        popular_tags = TagManager().get_top_five()
+        best_members_ = ProfileManager().get_top_five()
+    except:
+        raise Http404("")
 
     return render(request, 'questions_and_answers.html', {
         'questions': page_obj,
@@ -141,10 +133,6 @@ def hot_questions(request):
 
     best_members_ = ProfileManager().get_top_five()
 
-    # print(que[0].creation_date)
-    # print(que[1].creation_date)
-
-
     return render(request, 'hot_questions.html', {
         'questions': page_obj,
         'page': page,
@@ -154,17 +142,16 @@ def hot_questions(request):
 
 
 def one_question(request, page_number):
-    question = QuestionManager().get_que_by_id(int(page_number))
-    # print(question)
-    ans = AnswerManager().get_answers(int(page_number))
-    print(ans.count())
+    try:
+        question = QuestionManager().get_que_by_id(int(page_number))
+        ans = AnswerManager().get_answers(int(page_number))
 
-    page_obj, page = paginate(ans, request)
-    popular_tags = TagManager().get_top_five()
-    best_members_ = ProfileManager().get_top_five()
+        page_obj, page = paginate(ans, request)
+        popular_tags = TagManager().get_top_five()
+        best_members_ = ProfileManager().get_top_five()
+    except:
+        raise Http404("")
 
-    # print(question[0].title)
-    # print(page)
     return render(request, 'one_question_page.html', {
         'question': question[0],
         'answers': page_obj,
@@ -176,7 +163,6 @@ def one_question(request, page_number):
 
 def login(request):
     popular_tags = TagManager().get_top_five()
-
     best_members_ = ProfileManager().get_top_five()
 
     return render(request, 'login.html', {

@@ -19,6 +19,7 @@ class Command(BaseCommand):
         parser.add_argument('--answers', type=int)
         parser.add_argument('--likes', type=int)
         parser.add_argument('--amount', type=int)
+        parser.add_argument('--answers_likes', type=int)
 
     def create_tags(self, tags_amount):
         for _ in range(tags_amount):
@@ -31,26 +32,25 @@ class Command(BaseCommand):
             user.save()
 
             profile = Profile(user=user, name=f.name(),
-                              img='/Users/andrewkireev/Documents/GitHub/tp_Web-project/askme/static/img/profile.jpeg')
+                              img='https://picsum.photos/640/360')
             profile.save()
 
     def create_questions(self, questions_amount):
         users = list(Profile.objects.values_list(
                 'id', flat=True
-            ))
+        ))
         tags = list(Tag.objects.values_list(
             'id', flat=True
         ))
-        print(tags)
         for _ in range(questions_amount):
             question = Question.objects.create(
                 Author_id=choice(users), title=f.sentence(), text=f.text())
-            print(question.title)
             tags_number = randint(1, 6)
             for _ in range(tags_number):
                 tag = Tag.objects.get(pk=choice(tags))
-                print(tag)
                 question.tags.add(tag)
+                tag.rating += 1
+                tag.save()
             question.save()
 
     def create_answers(self, answers_amount):
@@ -69,7 +69,6 @@ class Command(BaseCommand):
             answer.save()
             question = Question.objects.get(pk=question_id)
             question.answers_count += 1
-            print(question.answers_count)
             question.save()
 
     def create_likes(self):
@@ -93,6 +92,29 @@ class Command(BaseCommand):
                 question.likes += 1
                 question.save()
 
+    def create_answers_likes(self):
+        users = list(Profile.objects.values_list(
+            'id', flat=True
+        ))
+
+        answers = list(Answer.objects.values_list(
+            'id', flat=True
+        ))
+        for i in answers:
+            likes_amount = randint(5, len(users))
+            likes_for_answer = list()
+            for j in range(likes_amount):
+                id_user = choice(users)
+                if (id_user) not in likes_for_answer:
+                    likes_for_answer.append(id_user)
+                else:
+                    continue
+                like = AnswersLikes.objects.create(user_id=id_user, answer_id=i)
+                like.save()
+                answer = Answer.objects.get(pk=i)
+                answer.likes += 1
+                answer.save()
+
 
 
     def handle(self, *args, **options):
@@ -100,7 +122,8 @@ class Command(BaseCommand):
         users_amount = options['users']
         questions_amount = options['questions']
         answers_amount = options['answers']
-        likes = options['answers']
+        likes = options['likes']
+        answers_likes = options['answers_likes']
         amount = options['amount']
 
         if amount != None:
@@ -120,3 +143,5 @@ class Command(BaseCommand):
             self.create_answers(answers_amount)
         if likes != None:
             self.create_likes()
+        if answers_likes != None:
+            self.create_answers_likes()

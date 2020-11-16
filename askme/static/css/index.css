@@ -70,15 +70,16 @@ hr {
 
 .answers-tags p{
     margin-left: 20px;
-    margin-top: 5px;
+    /*margin-top: 3px;*/
+    font-size: 23px;
 }
 
 /* a {
     text-decoration: underline;
 } */
 
-main a {
-    text-decoration: underline;
+a {
+    text-decoration: none;
 }
 .popular-tag{
     margin-top: -30px;
@@ -87,7 +88,11 @@ main a {
 .tags {
     display: inline;
 }
-.tags p {
+
+.tags a {
+    text-decoration: none;
+}
+.tags a {
     display: inline-block;
     margin-left: 10px;
     font-size: 25px;
@@ -129,33 +134,33 @@ main a {
 }
 
 .settings{
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     color: white;
     margin-left: 3px;
     margin-right: 3px;
 }
 
-.tags p:nth-child(5n-2) {
+.tags a:nth-child(5n-2) {
     color: red;
     font-size: 25px;
 }
 
-.tags p:nth-child(2n+2) {
+.tags a:nth-child(2n+2) {
     color: blue;
     font-size: 30px;
 }
 
-.tags p:nth-child(4n) {
+.tags a:nth-child(4n) {
     color: green;
     font-size: 30px;
 }
 
-.tags p:nth-child(7n) {
+.tags a:nth-child(7n) {
     color: black;
     font-size: 20px;
 }
 
-.tags p {
+.tags a {
     margin-right: 25px;
 }
 
@@ -306,7 +311,49 @@ hr {
     margin-top: 5px;
 }
 
-
+.img-rating {
+    padding-bottom: 10px;
+}
 
 
 /*/////*/
+
+*{transition: all 0.3s linear;}
+
+.hidden{
+  font-size: 0;
+}
+
+.heading{
+  font-family: 'Amatic SC', cursive;
+  font-size: 5em;
+  margin: 0;
+}
+
+.like,p{
+  font-family: 'Open Sans';
+}
+
+.like-toggle{
+  outline:none;
+  box-shadow:none;
+  border: none;
+  width: 40px;
+  height: 30px;
+  font-size: 1.3em;
+  border-radius: 100px;
+}
+
+.like-active.basic{
+  background: #7CC576;
+  color: green;
+}
+
+.number-of-likes {
+    padding-left: 10px;
+    font-size: 21px;
+}
+
+.like {
+    display: flex;
+}
