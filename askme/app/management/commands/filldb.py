@@ -27,8 +27,8 @@ class Command(BaseCommand):
             tag.save()
 
     def create_users(self, users_amount):
-        for _ in range(users_amount):
-            user = User(username=f.name(), password=f.password(), email=f.email())
+        for i in range(users_amount):
+            user = User(username=(f.name() + str(i)), password=f.password(), email=f.email())
             user.save()
 
             profile = Profile(user=user, name=f.name(),
@@ -81,6 +81,8 @@ class Command(BaseCommand):
         ))
         for i in questions:
             likes_amount = randint(5, len(users))
+            if likes_amount > 5:
+                likes_amount = 5
             likes_for_question = list()
             for j in range(likes_amount):
                 id_user = choice(users)
@@ -101,7 +103,9 @@ class Command(BaseCommand):
             'id', flat=True
         ))
         for i in answers:
-            likes_amount = randint(5, len(users))
+            likes_amount = randint(1, 5)
+            # if likes_amount > 5:
+            #     likes_amount = 5
             likes_for_answer = list()
             for j in range(likes_amount):
                 id_user = choice(users)
