@@ -4,13 +4,12 @@ from django.shortcuts import get_object_or_404
 from datetime import datetime
 
 
-
 class QuestionManager(models.Manager):
     def get_most_popular(self):
         return Question.objects.all().order_by('-likes')
 
     def get_newest(self):
-        return Question.objects.all().order_by('creation_date')
+        return Question.objects.all().order_by('-creation_date')
 
     def get_quest_by_teg(self, tag):
         questions = Question.objects.filter(tags__name=tag)
@@ -18,7 +17,6 @@ class QuestionManager(models.Manager):
 
     def get_que_by_id(self, index):
         return Question.objects.filter(pk=index)
-
 
 
 class AnswerManager(models.Manager):
@@ -39,6 +37,7 @@ class ProfileManager(models.Manager):
 class Tag(models.Model):
     name = models.CharField(max_length=64, verbose_name='Tag name')
     rating = models.IntegerField(default=0)
+    objects = TagManager()
 
     def __str__(self):
         return self.name
@@ -48,6 +47,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_index=True)
     name = models.CharField(max_length=256)
     img = models.ImageField(default='askme/static/img/profile.jpeg', blank=True)
+    objects = ProfileManager()
 
     def __str__(self):
         return self.name
@@ -61,6 +61,8 @@ class Question(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     likes = models.IntegerField(default=0)
     answers_count = models.IntegerField(default=0)
+    objects = QuestionManager()
+
     class Meta:
         verbose_name = 'Question'
         verbose_name_plural = 'Questions'
@@ -75,6 +77,7 @@ class Answer(models.Model):
     creation_date = models.DateTimeField(default=datetime.now, verbose_name='Date of creation')
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
+    objects = AnswerManager()
 
     class Meta:
         verbose_name = 'Answer'
@@ -92,6 +95,3 @@ class Like(models.Model):
 class AnswersLikes(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
-
-
-

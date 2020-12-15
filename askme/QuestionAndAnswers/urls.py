@@ -22,6 +22,7 @@ from app import views
 urlpatterns = [
     path('admin', admin.site.urls),
     path('login', views.login, name='login'),
+    path('logout', views.logout, name='logout'),
     path('new_question', views.new_question, name='new-question'),
     path('registration', views.registration, name='registration'),
     path('questions_by_teg/<str:tag_name>', views.questions_by_teg, name='question-by-teg'),

@@ -3,7 +3,11 @@
 {% block title %}Question page{% endblock title %}
 
 {% block navbar %}
-{% include 'inc/logged_navbar.html' %}
+{% if user.is_authenticated %}
+    {% include 'inc/logged_navbar.html' %}
+{% else %}
+    {% include 'inc/navbar.html' %}
+{% endif %}
 {% endblock navbar %}
 
 {% block content %}
@@ -13,14 +17,20 @@
     {% include 'inc/answer.html' %}
 {% endfor %}
 
+{% load crispy_forms_tags %}
+
 <hr style="margin-top: 30px"/>
-    <div class="form-group row">
-        <div class="col-sm-12">
-            <textarea type="text" class="form-control form-control-lg textarea" id="colFormLabelLg"
-            placeholder="Enter your answer here.." style="height: 120px;margin-left: 11px;"></textarea>
-        </div>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="form-group row">
+    <div class="col-sm-12">
+<!--        <textarea type="text" class="form-control form-control-lg textarea" id="colFormLabelLg"-->
+<!--        placeholder="Enter your answer here.." style="height: 120px;margin-left: 11px;"></textarea>-->
+        {{ form.text|as_crispy_field }}
     </div>
-<button type="button" class="btn btn-dark button-answer" style="width: 100px">Answer</button>
+</div>
+<button type="submit" class="btn btn-dark button-answer" style="width: 100px">Answer</button>
+</form>
 
 {% include 'inc/paginator.html' %}
 

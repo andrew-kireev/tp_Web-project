@@ -1,5 +1,6 @@
 {% extends 'inc/base.html' %}
 
+
 {% block title %}Login{% endblock title %}
 
 {% block navbar %}
@@ -13,21 +14,28 @@
 <p class="error-message">Sorry, wrong password!</p>
 {% endblock name %}
 
+{% load bootstrap4 %}
+
 {% block content %}
-<form>
+<form method="POST" enctype="multipart/form-data" class="mb-4">
+    {% csrf_token %}
+<!--    {% bootstrap_form form %}-->
 <div class="form-group row log_in short">
     <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Login</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Enter your login here..">
+<!--      <input type="username" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Enter your login here..">-->
+        {{ form.username}}
     </div>
   </div>
 <div class="form-group row log_in short">
   <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Password</label>
   <div class="col-sm-10">
-    <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Enter your password here..">
+<!--    <input type="password" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Enter your password here..">-->
+      {{ form.password}}
   </div>
 </div>
-</form>
-<button type="button" class="btn btn-dark button-ask" style="width: 100px">Login in!</button>
+<button type="submit" class="btn btn-dark button-ask" style="width: 100px">Login in!</button>
 <a class="create-account" href="#">create new account</a>
+
+
 {% endblock content %}

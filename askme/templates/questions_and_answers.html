@@ -3,7 +3,11 @@
 {% block title %}Question and Answers{% endblock title %}
 
 {% block navbar %}
-{% include 'inc/logged_navbar.html' %}
+{% if user.is_authenticated %}
+    {% include 'inc/logged_navbar.html' %}
+{% else %}
+    {% include 'inc/navbar.html' %}
+{% endif %}
 {% endblock navbar %}
 
 {% block name %}

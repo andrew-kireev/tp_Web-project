@@ -330,7 +330,7 @@ hr {
   margin: 0;
 }
 
-.like,p{
+.like.p{
   font-family: 'Open Sans';
 }
 
@@ -356,4 +356,8 @@ hr {
 
 .like {
     display: flex;
+}
+
+.form-control form-control-lg {
+    height: 400px;
 }

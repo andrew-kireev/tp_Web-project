@@ -3,8 +3,16 @@ from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
 # from djangoProject.settings import PER_PAGE
 from django.http import HttpResponse, Http404
+from django.urls import reverse
+
 from .models import *
-from django.shortcuts import get_object_or_404
+from .forms import LoginForm, RegistrationForm, SettingsForm, QuestionForm, AnswerForm
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import auth
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as django_logout
 
 # Create your views here.
 
@@ -57,19 +65,18 @@ one_page_question = [{'title': 'title1',
                       'tags': ['tag2', 'tag17']}]
 
 popular_tags_ = ['python',
-                'C++',
-                'Linux',
-                'TechnoPark',
-                'MailRu',
-                'Golang',
-                'Ngnix',
-                'Docker']
+                 'C++',
+                 'Linux',
+                 'TechnoPark',
+                 'MailRu',
+                 'Golang',
+                 'Ngnix',
+                 'Docker']
 
 best_members = ['Pavel Durov',
                 'Elon Mask',
                 'Linus Torvalds',
                 'Anton']
-
 
 
 def paginate(objects_list, request):
@@ -142,17 +149,30 @@ def hot_questions(request):
 
 
 def one_question(request, page_number):
-    try:
-        question = QuestionManager().get_que_by_id(int(page_number))
-        ans = AnswerManager().get_answers(int(page_number))
 
-        page_obj, page = paginate(ans, request)
-        popular_tags = TagManager().get_top_five()
-        best_members_ = ProfileManager().get_top_five()
-    except:
-        raise Http404("")
+    question = QuestionManager().get_que_by_id(int(page_number))
+    ans = AnswerManager().get_answers(int(page_number))
+
+    page_obj, page = paginate(ans, request)
+    popular_tags = TagManager().get_top_five()
+    best_members_ = ProfileManager().get_top_five()
+
+    if request.method == 'GET':
+        form = AnswerForm()
+    else:
+        form = AnswerForm(data=request.POST)
+        if form.is_valid() and request.user.is_authenticated:
+            que = Question.objects.get(id=page_number)
+            answer = Answer.objects.create(Author=request.user.profile,
+                                           question=que,
+                                           text=form.cleaned_data['text'])
+            que.answers_count += 1
+            que.save()
+            answer.save()
+            redirect(reverse('one-question-page', kwargs={'page_number': que.pk}))
 
     return render(request, 'one_question_page.html', {
+        'form': form,
         'question': question[0],
         'answers': page_obj,
         'page': page,
@@ -161,21 +181,75 @@ def one_question(request, page_number):
     })
 
 
+# def login(request):
+#     if request.method == 'GET':
+#         print('TUT')
+#         form = LoginForm()
+#     else:
+#         print('зашли')
+#         form = LoginForm(data=request.POST)
+#         if form.is_valid():
+#             print(request)
+#             user = auth.authenticate(request, **form.cleaned_data)
+#             print("Залогинелись" + user)
+#             if user is not None:
+#                 auth.login(request, user)
+#                 return redirect('/')
+#
+#     popular_tags = TagManager().get_top_five()
+#     best_members_ = ProfileManager().get_top_five()
+#
+#     return render(request, 'login.html', {
+#         'popular_tags': popular_tags,
+#         'best_members': best_members_,
+#         'form': form
+#     })
+
 def login(request):
+    if request.method == 'GET':
+        form = LoginForm()
+    else:
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = auth.authenticate(request, **form.cleaned_data)
+            print("логинемся")
+            print(user)
+            if user is not None:
+                auth.login(request, user)
+                return redirect('main-page')
+
     popular_tags = TagManager().get_top_five()
     best_members_ = ProfileManager().get_top_five()
 
     return render(request, 'login.html', {
-        'popular_tags': popular_tags,
-        'best_members': best_members_
+        'user': request.user,
+        'form': form,
+        'tags': popular_tags,
+        'best_members': best_members_,
     })
 
 
+@login_required
 def new_question(request):
     popular_tags = TagManager().get_top_five()
     best_members_ = ProfileManager().get_top_five()
 
+    if request.method == 'GET':
+        form = QuestionForm()
+    else:
+        form = QuestionForm(data=request.POST)
+        if form.is_valid():
+            question = Question.objects.create(Author=request.user.profile,
+                                               title=form.cleaned_data['title'],
+                                               text=form.cleaned_data['text'])
+            tags = form.cleaned_data['tags']
+            question.tags.set(tags)
+            question.save()
+            print(question.tags)
+            return redirect(reverse('one-question-page', kwargs={'page_number': question.pk}))
+
     return render(request, 'new_question.html', {
+        'form': form,
         'popular_tags': popular_tags,
         'best_members': best_members_
     })
@@ -185,20 +259,60 @@ def registration(request):
     popular_tags = TagManager().get_top_five()
     best_members_ = ProfileManager().get_top_five()
 
+    if request.method == 'GET':
+        form = RegistrationForm()
+        print('tut')
+    else:
+        print("регистрируемся")
+        form = RegistrationForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            user, profile = form.save()
+            auth.login(request, user)
+            return redirect("main-page")
+
     return render(request, 'registration.html', {
+        'form': form,
         'popular_tags': popular_tags,
         'best_members': best_members_
     })
 
 
+@login_required
 def settings(request):
     popular_tags = TagManager().get_top_five()
     best_members_ = ProfileManager().get_top_five()
 
+    if request.method == 'GET':
+        form = SettingsForm()
+        print('tut')
+    else:
+        print("регистрируемся")
+        form = SettingsForm(data=request.POST)
+        if form.is_valid():
+            user = request.user
+            print('валидный')
+            if form.cleaned_data["login"] != user.username and form.cleaned_data["login"] != '':
+                user.name = form.cleaned_data["login"]
+            if form.cleaned_data["username"] != user.username and form.cleaned_data["username"] != '':
+                user.username = form.cleaned_data["username"]
+            if form.cleaned_data["email"] != user.email and form.cleaned_data["email"] != '':
+                user.email = form.cleaned_data["email"]
+            if form.cleaned_data["password"] != '':
+                user.set_password(form.cleaned_data["password"])
+            user.save()
+            auth.login(request, user)
+
     return render(request, 'settings.html', {
+        'form': form,
         'popular_tags': popular_tags,
         'best_members': best_members_
     })
+
+
+@login_required
+def logout(request):
+    django_logout(request)
+    return redirect("main-page")
 
 
 def test(request):
