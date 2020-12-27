@@ -35,7 +35,7 @@ class SettingsForm(forms.Form):
     username = forms.CharField(required=False)
     password = forms.CharField(min_length=6,
                                widget=forms.PasswordInput, required=False)
-    avatar = forms.ImageField(required=False)
+    # avatar = forms.ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(SettingsForm, self).__init__(*args, **kwargs)
@@ -43,8 +43,6 @@ class SettingsForm(forms.Form):
 
     def clean_login(self):
         login = self.cleaned_data['login']
-        if login.strip() == '':
-            raise forms.ValidationError('Login is empty', code='validation_error')
 
         return login
 
@@ -63,6 +61,10 @@ class SettingsForm(forms.Form):
 
         return email
 
+    def clean_avatar(self):
+        avatar = self.cleaned_data['avatar']
+        return avatar
+
 
 class QuestionForm(forms.ModelForm):
     tags = forms.CharField()
@@ -71,13 +73,11 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ['title', 'text']
 
-
     def __init__(self, *args, **kwargs):
         super(QuestionForm, self).__init__(*args, **kwargs)
         self.fields['title'].label = ""
         self.fields['text'].label = ""
         self.fields['tags'].label = ""
-
 
     def clean_tags(self):
         tags = self.cleaned_data['tags']
@@ -116,14 +116,13 @@ class AnswerForm(forms.ModelForm):
         }
 
 
-
 class RegistrationForm(forms.Form):
     login = forms.CharField()
     email = forms.EmailField()
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
     repeatPassword = forms.CharField(widget=forms.PasswordInput)
-    avatar = forms.ImageField(required=False)
+    # avatar = forms.ImageField(required=False)
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -150,6 +149,10 @@ class RegistrationForm(forms.Form):
 
         return email
 
+    def clean_avatar(self):
+        avatar = self.cleaned_data['avatar']
+        return avatar
+
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
@@ -168,3 +171,14 @@ class RegistrationForm(forms.Form):
         new_user.save()
         profile.save()
         return new_user, profile
+
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['avatar']
+        required = None
+
+    def __init__(self, *args, **kwargs):
+        super(AvatarForm, self).__init__(*args, **kwargs)
+        self.fields['avatar'].label = ""

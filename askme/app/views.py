@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage, InvalidPage, PageNotAnInteger, Paginator
 # from djangoProject.settings import PER_PAGE
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.urls import reverse
-
+from django.views.decorators.http import require_POST
 from .models import *
-from .forms import LoginForm, RegistrationForm, SettingsForm, QuestionForm, AnswerForm
+from .forms import LoginForm, RegistrationForm, SettingsForm, QuestionForm, AnswerForm, AvatarForm
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import auth
 from django.contrib.auth import authenticate
@@ -169,7 +169,9 @@ def one_question(request, page_number):
             que.answers_count += 1
             que.save()
             answer.save()
-            redirect(reverse('one-question-page', kwargs={'page_number': que.pk}))
+            print(page)
+            return redirect(reverse('one-question-page', kwargs={'page_number': que.pk})
+            + f"?page={len(page_obj)}")
 
     return render(request, 'one_question_page.html', {
         'form': form,
@@ -180,30 +182,6 @@ def one_question(request, page_number):
         'best_members': best_members_
     })
 
-
-# def login(request):
-#     if request.method == 'GET':
-#         print('TUT')
-#         form = LoginForm()
-#     else:
-#         print('зашли')
-#         form = LoginForm(data=request.POST)
-#         if form.is_valid():
-#             print(request)
-#             user = auth.authenticate(request, **form.cleaned_data)
-#             print("Залогинелись" + user)
-#             if user is not None:
-#                 auth.login(request, user)
-#                 return redirect('/')
-#
-#     popular_tags = TagManager().get_top_five()
-#     best_members_ = ProfileManager().get_top_five()
-#
-#     return render(request, 'login.html', {
-#         'popular_tags': popular_tags,
-#         'best_members': best_members_,
-#         'form': form
-#     })
 
 def login(request):
     if request.method == 'GET':
@@ -261,13 +239,16 @@ def registration(request):
 
     if request.method == 'GET':
         form = RegistrationForm()
+        avatar_form = AvatarForm()
         print('tut')
     else:
         print("регистрируемся")
         form = RegistrationForm(data=request.POST, files=request.FILES)
+        # avatar_form = AvatarForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             user, profile = form.save()
             auth.login(request, user)
+            # avatar_form.save()
             return redirect("main-page")
 
     return render(request, 'registration.html', {
@@ -284,10 +265,13 @@ def settings(request):
 
     if request.method == 'GET':
         form = SettingsForm()
+        avatar_form = AvatarForm()
         print('tut')
     else:
         print("регистрируемся")
         form = SettingsForm(data=request.POST)
+        avatar_form = AvatarForm(data=request.POST, files=request.FILES, instance=request.user.profile)
+        print(request.FILES)
         if form.is_valid():
             user = request.user
             print('валидный')
@@ -301,11 +285,14 @@ def settings(request):
                 user.set_password(form.cleaned_data["password"])
             user.save()
             auth.login(request, user)
+            # if avatar_form.get('avatar', None) is not None:
+            avatar_form.save()
 
     return render(request, 'settings.html', {
         'form': form,
         'popular_tags': popular_tags,
-        'best_members': best_members_
+        'best_members': best_members_,
+        'avatar_form': avatar_form
     })
 
 
@@ -313,6 +300,87 @@ def settings(request):
 def logout(request):
     django_logout(request)
     return redirect("main-page")
+
+
+@require_POST
+@login_required
+def like_question(request):
+    data = request.POST
+    if Like.objects.filter(user=request.user.profile, question_id=data['qid']).exists():
+        print('Уже существует')
+        question = Question.objects.get(pk=data['qid'])
+        return JsonResponse({'questions_likes': question.likes})
+    print('\n\n', '=' * 100)
+    print(data)
+    print('=' * 100, '\n\n')
+    like = Like.objects.create(user=request.user.profile, question_id=data['qid'])
+    print(like)
+    like.save()
+    question = Question.objects.get(pk=data['qid'])
+    question.likes += 1
+    question.save()
+    print(question)
+
+    return JsonResponse({'questions_likes': question.likes})
+
+
+@require_POST
+@login_required
+def like_one_question(request, page_number):
+    data = request.POST
+    if Like.objects.filter(user=request.user.profile, question_id=data['qid']).exists():
+        print('Уже существует')
+        question = Question.objects.get(pk=data['qid'])
+        return JsonResponse({'questions_likes': question.likes})
+    print('\n\n', '=' * 100)
+    print(data)
+    print('=' * 100, '\n\n')
+    like = Like.objects.create(user=request.user.profile, question_id=data['qid'])
+    print(like)
+    like.save()
+    question = Question.objects.get(pk=data['qid'])
+    question.likes += 1
+    question.save()
+    print(question)
+
+    return JsonResponse({'questions_likes': question.likes})
+
+
+@require_POST
+@login_required
+def like_answer(request, page_number):
+    data = request.POST
+    if AnswersLikes.objects.filter(user=request.user.profile, answer_id=data['qid']).exists():
+        print('Уже существует')
+        answer = Answer.objects.get(pk=data['qid'])
+        return JsonResponse({'questions_likes': answer.likes})
+    print('\n\n', '=' * 100)
+    print(data)
+    print('=' * 100, '\n\n')
+    like = AnswersLikes.objects.create(user=request.user.profile, answer_id=data['qid'])
+    print(like)
+    like.save()
+    answer = Answer.objects.get(pk=data['qid'])
+    answer.likes += 1
+    answer.save()
+    print(answer)
+
+    return JsonResponse({'answers_likes': answer.likes})
+
+
+@require_POST
+@login_required
+def is_correct_answer(request, page_number):
+    data = request.POST
+    print(data)
+    current_answer = Answer.objects.get(pk=data['id'])
+    if current_answer.is_correct:
+        current_answer.is_correct = False
+    else:
+        current_answer.is_correct = True
+    current_answer.save()
+    print(current_answer.is_correct)
+    return JsonResponse({'is_correct': current_answer.is_correct})
 
 
 def test(request):

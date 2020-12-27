@@ -19,6 +19,14 @@ class QuestionManager(models.Manager):
         return Question.objects.filter(pk=index)
 
 
+class LikeManager(models.Manager):
+    pass
+
+
+class LikeAnswerManager(models.Manager):
+    pass
+
+
 class AnswerManager(models.Manager):
     def get_answers(self, index):
         return Answer.objects.all().filter(question__pk=index).all().order_by('-likes')
@@ -46,7 +54,7 @@ class Tag(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_index=True)
     name = models.CharField(max_length=256)
-    img = models.ImageField(default='askme/static/img/profile.jpeg', blank=True)
+    avatar = models.ImageField(default='img/default_avatar.jpg', upload_to='avatar/%y/%m/%d')
     objects = ProfileManager()
 
     def __str__(self):
@@ -77,6 +85,7 @@ class Answer(models.Model):
     creation_date = models.DateTimeField(default=datetime.now, verbose_name='Date of creation')
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
+    is_correct = models.BooleanField(default=False)
     objects = AnswerManager()
 
     class Meta:
@@ -90,8 +99,10 @@ class Answer(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    objects = LikeManager()
 
 
 class AnswersLikes(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    objects = LikeAnswerManager()

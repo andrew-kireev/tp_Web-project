@@ -1,5 +1,7 @@
 {% extends 'inc/base.html' %}
 
+{% load static %}
+
 {% block title %}Question page{% endblock title %}
 
 {% block navbar %}
@@ -35,3 +37,8 @@
 {% include 'inc/paginator.html' %}
 
 {% endblock content %}
+
+{% block jscode %}
+    <script src="{% static '/js/like.js' %}"></script>
+    <script src="{% static '/js/is_correct.js' %}"></script>
+{% endblock jscode %}

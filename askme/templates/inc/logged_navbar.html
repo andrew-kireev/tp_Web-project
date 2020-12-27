@@ -8,7 +8,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ASK!</button>
     </form>
     <div class="profile">
-        <img class="profile-img"src="{% static "img/profile.jpeg" %}">
+        <img class="profile-img" src="{{ request.user.profile.avatar.url }}" class="avatar-img rounded">
         <span class="profile-links">
             <p>{{ request.user.username }}</p>
             <a href="{% url "settings" %}" class="settings">settings</a>

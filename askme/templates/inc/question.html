@@ -3,11 +3,11 @@
 <div class="row main-question">
     <div class="col-3">
             <div class="img-rating">
-            <img class="question-img" src={{ question.Author.img }} height="170px" width="170px"></img>
+            <img class="question-img" src="{{ question.Author.user.profile.avatar.url }}" height="170px" width="170px"></img>
 <!--            <input class="like" type="number" value={{ question.likes }} size="50px">-->
             <div class='like'>
-              <button class='like-toggle basic'>♥</button>
-                <p class="number-of-likes">{{ question.likes }}</p>
+              <button class='like-toggle basic js-like' data-qid="{{ question.pk }}">♥</button>
+                <p class="number-of-likes" id="questions_likes-{{ question.pk }}">{{ question.likes }}</p>
 <!--              <span class='hidden' >1 Like</span>-->
             </div>
 <!--            <button type="submit" class="like" name="blogpost_id" value={{ question.likes }} class="btn btn-info">Like</button>-->
