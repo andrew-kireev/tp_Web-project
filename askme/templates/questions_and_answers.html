@@ -1,0 +1,31 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+
+{% block title %}Question and Answers{% endblock title %}
+
+{% block navbar %}
+{% if user.is_authenticated %}
+    {% include 'inc/logged_navbar.html' %}
+{% else %}
+    {% include 'inc/navbar.html' %}
+{% endif %}
+{% endblock navbar %}
+
+{% block name %}
+<span class="Questions">
+    <h2 class="new-question">New Questions</h2>
+    <a href="{% url "hot-questions" %}"><u><p class="hot-question" href="#" >Hot Questions</p></u></a>
+</span>
+{% endblock name %}
+
+{% block content %}
+{% for question in questions %}
+    {% include 'inc/one_question.html' %}
+{% endfor %}
+{% include 'inc/paginator.html' %}
+
+{% endblock content %}
+
+{% block jscode %}
+    <script src="{% static '/js/like.js' %}"></script>
+{% endblock jscode %}

@@ -1,0 +1,43 @@
+{% extends 'inc/base.html' %}
+
+{% block title %}Ask question{% endblock title %}
+
+{% block navbar %}
+{% include 'inc/logged_navbar.html' %}
+{% endblock navbar %}
+
+{% block name %}
+<span class="Questions">
+    <h2 class="new-question">New Questions</h2>
+</span>
+{% endblock name %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
+<div class="form-group row new-quesion-inputs">
+    <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Title</label>
+    <div class="col-sm-10">
+<!--      <input type="text" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Write question title..">-->
+        {{ form.title|as_crispy_field }}
+    </div>
+  </div>
+  <div class="form-group row new-quesion-inputs">
+    <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Text</label>
+    <div class="col-sm-10">
+<!--      <input type="text" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Write your quesion.." style="height: 400px;">-->
+        {{ form.text|as_crispy_field }}
+    </div>
+  </div>
+<div class="form-group row new-quesion-inputs">
+  <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Tags</label>
+  <div class="col-sm-10">
+<!--    <input type="text" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Add some tags..">-->
+      {{ form.tags|as_crispy_field }}
+  </div>
+</div>
+    <button type="submit" class="btn btn-dark button-ask" style="width: 100px">ASK!</button>
+</form>
+{% endblock content %}

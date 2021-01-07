@@ -1,0 +1,23 @@
+{% extends 'inc/base.html' %}
+
+{% block title %}Question by teg{% endblock title %}
+
+{% block navbar %}
+{% include 'inc/logged_navbar.html' %}
+{% endblock navbar %}
+
+{% block name %}
+<span class="Tags-header">
+        <h2 class="new-question">Tag:</h2>
+        <h2 class="header-some-tag">{{tag}}</h2>
+</span>
+{% endblock name %}
+
+{% block content %}
+
+{% for question in questions %}
+    {% include 'inc/one_question.html' %}
+{% endfor %}
+{% include 'inc/paginator.html' %}
+
+{% endblock content %}

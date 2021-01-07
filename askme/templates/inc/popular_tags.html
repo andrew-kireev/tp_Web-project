@@ -1,0 +1,10 @@
+<div class="row test">
+    <span class="tags">
+        <h1 class="popular-tag">Popular Tags</h1>
+<!--        <div style="margin-top: 19px;">-->
+            {% for tag in popular_tags %}
+                <a href="{% url "question-by-teg" tag %}"> {{ tag }} </a>
+            {% endfor %}
+<!--        </div>-->
+    </span>
+</div>

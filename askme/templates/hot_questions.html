@@ -1,0 +1,26 @@
+{% extends 'inc/base.html' %}
+
+{% block title %}Question and Answers{% endblock title %}
+
+{% block navbar %}
+{% if request.user.is_authenticated %}
+    {% include 'inc/logged_navbar.html' %}
+{% else %}
+    {% include 'inc/navbar.html' %}
+{% endif %}
+{% endblock navbar %}
+
+{% block name %}
+<span class="Questions">
+    <h2 class="new-question">Hot questions</h2>
+    <a href="{% url "main-page" %}"><u><p class="hot-question" href="#" >New questions</p></u></a>
+</span>
+{% endblock name %}
+
+{% block content %}
+{% for question in questions %}
+    {% include 'inc/one_question.html' %}
+{% endfor %}
+{% include 'inc/paginator.html' %}
+
+{% endblock content %}

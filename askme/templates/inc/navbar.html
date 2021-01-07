@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark bg-dark">
+<a href="{% url "main-page" %}" class="navbar-brand">Questions and Answers</a>
+<form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="
+    width: 500px;">
+  <button href="{% url "new-question" %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">ASK!</button>
+</form>
+<div class="profile">
+    <span class="registretion">
+        <a href="{% url 'login' %}" class="settings">log in</a>
+        <a href="{% url 'registration' %}" class="settings">register</a>
+    </span>
+</div>
+</nav>

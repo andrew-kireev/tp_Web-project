@@ -1,0 +1,309 @@
+@font-face {
+    font-family: Quicksand;
+    src: url("Quicksand-VariableFont_wght.ttf");
+}
+
+* {
+    font-family: Quicksand;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+
+hr {
+    color: black;
+}
+
+.new-question{
+    margin-left: 50px;
+}
+
+.Questions {
+    margin-top: 25px;
+    display : flex;
+}
+
+.new-question {
+    font-weight: bold;
+    display: inline;
+    padding: 10px;
+}
+
+.hot-question {
+    margin-top: 5px;
+    margin-left: 30px;
+    padding: 10px;
+    font-size : 20px;
+}
+
+.question-box {
+    border: 2px solid;
+    padding: 10px;
+    margin: 10px;
+    margin-right: 60px;
+    margin-top: 37px;
+    border-radius: 12px;
+}
+
+.question-img {
+    margin: 10px;
+    border: 3px solid
+}
+
+.like {
+    width: 50px;
+    margin-left: 65px;
+}
+
+.img-rating {
+    margin-left: 30px;
+    display: block;
+}
+
+.answers-tags {
+    display: inline-block;
+    display: flex;
+}
+
+.answers-tags p{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+/* a {
+    text-decoration: underline;
+} */
+
+main a {
+    text-decoration: underline;
+}
+.popular-tag{
+    margin-top: -30px;
+}
+
+.tags {
+    display: inline;
+}
+.tags p {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 25px;
+    font-style: italic;
+    color: gray;
+}
+
+.question-text {
+    font-size: 18px;
+}
+
+.paginator {
+    margin-left: 40px;
+    margin-top: 100px;
+}
+.best-members {
+    margin-top: 50px;
+    display: block;
+    font-size: 22px;
+}
+
+.profile {
+    display: flex;
+    margin-right: 50px;
+}
+
+.profile-img {
+    margin: 10px;
+    height: 60px;
+    width: 60px;
+    border: 2px solid;
+}
+
+.profile-links p{
+    color: white;
+    margin-left: 3px;
+    margin-bottom: 5px;
+    margin-top: 12px;
+}
+
+.settings{
+    text-decoration: underline;
+    color: white;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.tags p:nth-child(5n-2) {
+    color: red;
+    font-size: 25px;
+}
+
+.tags p:nth-child(2n+2) {
+    color: blue;
+    font-size: 30px;
+}
+
+.tags p:nth-child(4n) {
+    color: green;
+    font-size: 30px;
+}
+
+.tags p:nth-child(7n) {
+    color: black;
+    font-size: 20px;
+}
+
+.tags p {
+    margin-right: 25px;
+}
+
+
+
+.side_tags {
+    margin-top: 30px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {}
+
+/* questions_by_teg.html */
+
+
+.Tags-header {
+    margin-top: 25px;
+    display : flex;
+}
+
+.header-some-tag {
+
+    margin-top: 2px;
+    margin-left: 20px;
+}
+
+
+.header-tag{
+    margin-left: 50px;
+}
+
+.Tags-header h2{
+    font-weight: bold;
+    display: inline;
+    padding: 10px;
+}
+
+/* one_question_page */
+
+.question-tags {
+    margin-left: -50px;
+    display: inline-block;
+    display: flex;
+}
+
+.question-tags p{
+    margin-left: 20px;
+    margin-top: 2px;
+    font-size: 20px;
+}
+
+.registretion {
+    margin-right: 70px;
+}
+
+.registretion p{
+    color: white;
+    margin-left: 3px;
+    margin-bottom: 5px;
+    margin-top: 12px;
+}
+
+
+.form-group {
+    margin-top: 30px;
+    margin-right: 56px;
+}
+
+
+.custom-control {
+    margin-top: 20px;
+    margin-left: -15px;
+}
+
+.button-answer{
+    margin-left: 11px;
+    margin-bottom: 30px;
+}
+
+hr {
+    margin-left: 11px;
+    margin-right: 60px
+}
+
+
+/* New_question */
+
+
+.title {
+    display: flex;
+    display: inline;
+}
+
+.input-text {
+    height: 300px;
+    width: 300px;
+}
+
+.col-form-label-lg {
+    padding-left: 60px;
+}
+
+.form-group {
+    padding-right: 42px;
+}
+
+.button-ask {
+    margin-top: 30px;
+    margin-left: 204px;
+}
+
+.new-quesion-inputs .col-sm-10 {
+    padding-right: 70px;
+}
+
+
+/* login */
+
+
+.error-message {
+    color: red;
+    margin-left: 57px;
+    margin-top: 7px;
+}
+
+
+.short .col-sm-10 {
+    padding-right: 650px;
+}
+
+.create-account {
+    display: block;
+    margin-left: 204px;
+    margin-top: 35px;
+}
+
+
+/* Registration */
+
+
+.registr-button {
+    margin-left: 204px;
+    margin-top: 15px;
+}
+
+
+/* Settings */
+
+.save-button {
+    margin-left: 204px;
+    margin-top: 5px;
+}
